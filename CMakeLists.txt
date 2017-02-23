@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 
-project(Common CXX)
+project(ProtocolWire CXX)
 
 option(build_tests "build tests" OFF)
 
@@ -35,7 +35,7 @@ set(
 )
 
 # === build library ===
-add_library(payment_channel ${library_sources})
+add_library(protocol_wire ${library_sources})
 
 # === build tests ===
 if(build_tests)
@@ -46,7 +46,7 @@ if(build_tests)
   foreach(s ${tests})
     get_filename_component (sn ${s} NAME_WE)
     add_executable(${sn} ${s})
-    target_link_libraries(${sn} payment_channel ${CONAN_LIBS})
+    target_link_libraries(${sn} protocol_wire ${CONAN_LIBS})
     add_test(${sn} "bin/${sn}")
   endforeach(s)
 
