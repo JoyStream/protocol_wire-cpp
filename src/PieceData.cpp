@@ -34,8 +34,8 @@ namespace protocol_wire {
         // Decode hex string, and copy into array
         std::stringstream s;
         s << std::hex << src;
-
-        for(uint i = 0; i < length;i++)
+ 
+        for(unsigned int i = 0; i < length;i++)
             s >> piece.get()[i];
 
         return PieceData(piece, length);

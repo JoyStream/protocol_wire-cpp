@@ -1,29 +1,26 @@
 #include <protocol_wire/NetworkInt.hpp>
 
-#ifdef _WIN32
-# include <winsock2.h>
+#if defined(_WIN32) || defined(_WINDOWS)
+#  include <winsock2.h>
 #else
-# include <arpa/inet.h>
-#endif
+#  include <arpa/inet.h>
+#  if defined(__linux)
+#    include <endian.h>
+#  elif defined(__FreeBSD__) || defined(__NetBSD__)
+#    include <sys/endian.h>
+#  elif defined(__OpenBSD__)
+#    include <sys/types.h>
+#    define be64toh(x) betoh64(x)
+#  endif
 
-#if defined(__linux)
-#  include <endian.h>
-#elif defined(__FreeBSD__) || defined(__NetBSD__)
-#  include <sys/endian.h>
-#elif defined(__OpenBSD__)
-#  include <sys/types.h>
-#  define be64toh(x) betoh64(x)
-#endif
+#  ifndef htonll
+#    define htonll(x) htobe64(x)
+#  endif
 
-// assume windows and osx have defined htonll and ntohll
-// define similar macros for remaining unix platforms
-#ifndef htonll
-#  define htonll(x) htobe64(x)
-#endif
-
-#ifndef ntohll
-#  define ntohll(x) be64toh(x)
-#endif
+#  ifndef ntohll
+#    define ntohll(x) be64toh(x)
+#  endif
+#endif // if windows
 
 #include <common/UCharArray.hpp>
 

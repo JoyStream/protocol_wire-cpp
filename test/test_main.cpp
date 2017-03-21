@@ -40,7 +40,7 @@ TEST(protocol_wire_test, char_array_buffer) {
     EXPECT_EQ((unsigned char)data[1], 0xef);
 
     // seek write position
-    EXPECT_EQ(buff.pubseekpos(3, std::ios::out), 3);
+    EXPECT_EQ(buff.pubseekpos(3, std::ios::out), std::streamoff(3));
 
     char AB[2] = {'A', 'B'};
     buff.sputn(AB, 2);
@@ -52,16 +52,16 @@ TEST(protocol_wire_test, char_array_buffer) {
     EXPECT_EQ(buff.sputn(AB, 2), 0);
 
     // fail to seek outside bounds of array
-    EXPECT_EQ(buff.pubseekpos(sizeof(data), std::ios::in), -1);
-    EXPECT_EQ(buff.pubseekpos(-1, std::ios::in), -1);
+    EXPECT_EQ(buff.pubseekpos(sizeof(data), std::ios::in), std::streamoff(-1));
+    EXPECT_EQ(buff.pubseekpos(-1, std::ios::in), std::streamoff(-1));
 
     // seek to absolute position
-    EXPECT_EQ(buff.pubseekpos(1, std::ios::in), 1);
+    EXPECT_EQ(buff.pubseekpos(1, std::ios::in), std::streamoff(1));
     EXPECT_EQ(buff.in_avail(), 4);
     EXPECT_EQ((unsigned int)buff.sgetc(), 0xef);
 
     // seek to relative position
-    EXPECT_EQ(buff.pubseekoff(0, std::ios_base::end, std::ios::in), sizeof(data) - 1);
+    EXPECT_EQ(buff.pubseekoff(0, std::ios_base::end, std::ios::in), std::streamoff(sizeof(data) - 1));
     EXPECT_EQ(buff.sgetc(), 'B');
 }
 
