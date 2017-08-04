@@ -5,7 +5,7 @@
 char_array_buffer::char_array_buffer(char *begin, char *end) {
     // end pointer should be one location past the last element in the array
 
-    if(begin == end || begin > end || begin == nullptr || end == nullptr) {
+    if(begin > end || begin == nullptr || end == nullptr) {
         throw std::runtime_error("stream buffer initialized with invalid pointers");
     }
 
