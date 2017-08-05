@@ -27,6 +27,32 @@ struct Stream {
     InputWireStream reader() { return InputWireStream(&buffer); }
 };
 
+TEST(protocol_wire_test, zero_size_char_array_buffer) {
+  char data[] = { 0x11 };
+  char data_to_write[] = {0, 1, 2, 3};
+  char output;
+
+  // Empty Array
+  char_array_buffer buff(data, data);
+
+  // No data available
+  EXPECT_EQ(buff.in_avail(), 0);
+
+  // Cannot seek into the buffer
+  EXPECT_EQ(buff.pubseekpos(1, std::ios::in), std::streamoff(-1));
+
+  // Get EOF when trying to read from buffer
+  EXPECT_EQ(buff.sgetc(), EOF);
+  EXPECT_EQ(buff.sgetc(), std::streamoff(-1));
+
+  // Bytes read should be zero when trying to read from stream
+  EXPECT_EQ(buff.sgetn(&output, 1), std::streamsize(0));
+
+  // Cannot write into the buffer
+  EXPECT_EQ(buff.sputc(0x00), std::streamoff(-1));
+  EXPECT_EQ(buff.sputn(data_to_write, sizeof(data_to_write)), std::streamsize(0));
+}
+
 TEST(protocol_wire_test, char_array_buffer) {
     char data[] = {0, 0, 0, 0, 0};
     char_array_buffer buff(data, data + sizeof(data));
