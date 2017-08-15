@@ -21,7 +21,7 @@ class ProtocolWireBase(ConanFile):
         self.run("cmake --build . %s" % cmake.build_config)
 
     def package(self):
-        self.copy("*.hpp", dst="include", src="repo/include/")
+        self.copy("*.hpp", dst="include", src="repo/sources/include/")
         self.copy("*.a", dst="lib", keep_path=False)
         self.copy("*.lib", dst="lib", keep_path=False)
 
