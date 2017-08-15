@@ -5,7 +5,7 @@ class ProtocolWireBase(ConanFile):
     name = "ProtocolWire"
     version = "0.1.1"
     license = "(c) JoyStream Inc. 2016-2017"
-    url = "https://github.com/JoyStream/protocol_wire-conan.git"
+    url = "https://github.com/JoyStream/protocol_wire-cpp.git"
     git_repo = "git@github.com:JoyStream/protocol_wire-cpp.git"
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake"
