@@ -9,7 +9,7 @@ class ProtocolWireBase(ConanFile):
     git_repo = "git@github.com:JoyStream/protocol_wire-cpp.git"
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake"
-    requires = "Common/0.1@joystream/stable"
+    requires = "Common/0.1.1@joystream/stable"
     build_policy = "missing"
 
     def source(self):
