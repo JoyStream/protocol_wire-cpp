@@ -1,42 +1,29 @@
-# protocol_wire-cpp
+
+# ProtocolWire
 C++ wire library for the JoyStream extension protocol, as specified [here](http://#).
 
-## Tools
+Current published release: `ProtocolWire/0.1.1@joystream/stable`
 
-- [Conan](http://conan.io)
-- CMake
+### Dependencies
 
-## Use
+This library, has *immediate* dependencies
 
-The easiest way to use the library in your own project is to use Conan. For more information, see the [readme](https://github.com/JoyStream/protocol_wire-conan)
-on the repo for this package recipe.
+- [Common](https://github.com/JoyStream/common-cpp)
+- [gtest](https://github.com/google/googletest/)
 
-## Build
 
-If you instead want to build it directly, then you first have to install the dependencies of this
-library using Conan, which you do by simply doing the following inside of your desired build directory
+and they are managed using [Conan](https://conan.io), a platform and build system agnostic C++ package manager.
 
-`conan install <path>`
+### Example Usage
 
-where `<path>` is the path to protcol_wire source directory. Then, in the same directory, invoke CMake
+See [Extension](https://github.com/JoyStream/extension-cpp)
 
-```
-cmake <path>
-cmake --build .
-```
-
-No path is required if you are building directly in the source directory.
-
-## Tests
-
-To build the tests, just pass option `build_tests=on` in the makefile generation step
+## Running Unit Tests
 
 ```
-cmake <path> -Dbuild_tests=on
-cmake --build .
+sh run_tests.sh
 ```
 
-and then you can run the resulting test binary `test_main` in the `bin` folder.
+## License & Copyright
 
-## License and copyright
-WIP
+`...add later...`
