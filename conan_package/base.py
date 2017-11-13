@@ -3,13 +3,14 @@ import os
 
 class ProtocolWireBase(ConanFile):
     name = "ProtocolWire"
-    version = "0.1.1"
+    version = "0.1.2"
     license = "(c) JoyStream Inc. 2016-2017"
     url = "https://github.com/JoyStream/protocol_wire-cpp.git"
-    git_repo = "git@github.com:JoyStream/protocol_wire-cpp.git"
+    repo_ssh_url = "git@github.com:JoyStream/protocol_wire-cpp.git"
+    repo_https_url = "https://github.com/JoyStream/protocol_wire-cpp.git"
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake"
-    requires = "Common/0.1.1@joystream/stable"
+    requires = "Common/0.1.2@joystream/stable"
     build_policy = "missing"
 
     def source(self):
