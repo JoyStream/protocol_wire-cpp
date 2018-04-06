@@ -23,5 +23,7 @@
 #include <protocol_wire/NetworkInt.hpp>
 #include <protocol_wire/InputWireStream.hpp>
 #include <protocol_wire/OutputWireStream.hpp>
+#include <protocol_wire/SpeedTestRequest.hpp>
+#include <protocol_wire/SpeedTestPayload.hpp>
 
 #endif // JOYSTREAM_PROTOCOLWIRE_HPP

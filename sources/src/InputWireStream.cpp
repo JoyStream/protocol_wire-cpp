@@ -9,6 +9,8 @@
 #include <protocol_wire/RequestFullPiece.hpp>
 #include <protocol_wire/FullPiece.hpp>
 #include <protocol_wire/Payment.hpp>
+#include <protocol_wire/SpeedTestRequest.hpp>
+#include <protocol_wire/SpeedTestPayload.hpp>
 
 namespace joystream {
 namespace protocol_wire {
@@ -115,6 +117,34 @@ Payment InputWireStream::readPayment() {
     payment.setSig(sig);
 
     return payment;
+}
+
+SpeedTestRequest InputWireStream::readSpeedTestRequest() {
+  SpeedTestRequest request;
+
+  auto value = readInt<decltype(request.payloadSize())>();
+
+  request.setPayloadSize(value);
+
+  return request;
+}
+
+SpeedTestPayload InputWireStream::readSpeedTestPayload() {
+  SpeedTestPayload payload;
+
+  auto size = readInt<uint32_t>();
+
+  // check max size limit?
+  if(size > _buffer->in_avail()) {
+      throw std::runtime_error("unable to read speedtest payload, not enough data in stream buffer");
+  }
+
+  // skip over the data, we don't actually care what the payload is, just that it was sent
+  _buffer->pubseekoff(size, std::ios_base::cur, std::ios_base::in);
+
+  payload.setPayloadSize(size);
+
+  return payload;
 }
 
 Coin::PubKeyHash InputWireStream::readPubKeyHash() {

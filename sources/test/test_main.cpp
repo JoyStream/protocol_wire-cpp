@@ -261,6 +261,28 @@ TEST(protocol_wire_test, requestFullPiece)
     EXPECT_EQ(m, m2);
 }
 
+TEST(protocol_wire_test, speedTestRequest) {
+  const int payloadSize = 50000;
+  SpeedTestRequest m(payloadSize);
+
+  EXPECT_EQ(m.payloadSize(), payloadSize);
+
+  Stream<SpeedTestRequest> stream(m);
+  auto m2 = stream.reader().readSpeedTestRequest();
+  EXPECT_EQ(m, m2);
+}
+
+TEST(protocol_wire_test, speedTestPayload) {
+  const int payloadSize = 50000;
+  SpeedTestPayload m(payloadSize);
+
+  EXPECT_EQ(m.payloadSize(), payloadSize);
+
+  Stream<SpeedTestPayload> stream(m);
+  auto m2 = stream.reader().readSpeedTestPayload();
+  EXPECT_EQ(m, m2);
+}
+
 int main(int argc, char *argv[])
 {
     ::testing::InitGoogleTest(&argc, argv);
