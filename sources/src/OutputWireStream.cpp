@@ -9,6 +9,8 @@
 #include <protocol_wire/RequestFullPiece.hpp>
 #include <protocol_wire/FullPiece.hpp>
 #include <protocol_wire/Payment.hpp>
+#include <protocol_wire/SpeedTestRequest.hpp>
+#include <protocol_wire/SpeedTestPayload.hpp>
 
 namespace joystream {
 namespace protocol_wire {
@@ -81,6 +83,22 @@ std::streamsize OutputWireStream::write(const FullPiece &piece) {
 
 std::streamsize OutputWireStream::write(const Payment &payment) {
     return writeSignature(payment.sig());
+}
+
+std::streamsize OutputWireStream::write(const SpeedTestRequest &speedTestRequest) {
+  return writeInt<uint32_t>(speedTestRequest.payloadSize());
+}
+
+std::streamsize OutputWireStream::write(const SpeedTestPayload &speedTestPayload) {
+  std::streamsize written = 0;
+
+  // Initialize payload to 0xff (we don't want to send a dump of our memory to the other side)
+  std::vector<unsigned char> payload(speedTestPayload.payloadSize(), 0xff);
+
+  written += writeInt<uint32_t>(speedTestPayload.payloadSize());
+  written += writeBytes(payload);
+
+  return written;
 }
 
 std::streamsize OutputWireStream::writePubKeyHash(const Coin::PubKeyHash& hash) {
