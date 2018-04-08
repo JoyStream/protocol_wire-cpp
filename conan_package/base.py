@@ -3,7 +3,7 @@ import os
 
 class ProtocolWireBase(ConanFile):
     name = "ProtocolWire"
-    version = "0.1.2"
+    version = "0.1.3"
     license = "(c) JoyStream Inc. 2016-2017"
     url = "https://github.com/JoyStream/protocol_wire-cpp.git"
     repo_ssh_url = "git@github.com:JoyStream/protocol_wire-cpp.git"

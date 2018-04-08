@@ -23,6 +23,8 @@ class Ready;
 class RequestFullPiece;
 class FullPiece;
 class Payment;
+class SpeedTestRequest;
+class SpeedTestPayload;
 
 class PieceData;
 class BuyerTerms;
@@ -43,6 +45,8 @@ public:
     RequestFullPiece readRequestFullPiece();
     FullPiece readFullPiece();
     Payment readPayment();
+    SpeedTestRequest readSpeedTestRequest();
+    SpeedTestPayload readSpeedTestPayload();
 
 private:
 

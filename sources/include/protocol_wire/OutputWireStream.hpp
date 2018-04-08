@@ -24,6 +24,8 @@ class Ready;
 class RequestFullPiece;
 class FullPiece;
 class Payment;
+class SpeedTestRequest;
+class SpeedTestPayload;
 
 class PieceData;
 class BuyerTerms;
@@ -44,6 +46,8 @@ public:
     std::streamsize write(const RequestFullPiece&);
     std::streamsize write(const FullPiece&);
     std::streamsize write(const Payment&);
+    std::streamsize write(const SpeedTestRequest&);
+    std::streamsize write(const SpeedTestPayload&);
 
     template<class T>
     static std::streamsize sizeOf(const T& msg) {

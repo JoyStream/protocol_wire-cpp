@@ -32,6 +32,8 @@ set(
     src/char_array_buffer.cpp
     src/BinaryStreamWriter.cpp
     src/BinaryStreamReader.cpp
+    src/SpeedTestRequest.cpp
+    src/SpeedTestPayload.cpp
 )
 
 # === build library ===
